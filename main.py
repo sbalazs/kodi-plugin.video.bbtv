@@ -87,7 +87,7 @@ def play_video(path):
     video_page_html = load_url(bbtv_video_url_base + path)
     vimeo_url = re.compile('<meta property="og:video:url" content="([-_=a-zA-Z0-9\:\/\.\?]+)"').findall(video_page_html)
     vimeo_page_html = load_url(vimeo_url[0])
-    video_url = re.compile('"progressive":\[{"profile":[-a-zA-Z0-9\,\:\"\/]+"url":"([-_=a-zA-Z0-9\:\/\.\?]+)"').findall(vimeo_page_html)
+    video_url = re.compile('"progressive":\[{"profile":[-a-zA-Z0-9\,\:\"\/\&]+"url":"([-_=a-zA-Z0-9\:\/\.\?\&]+)"').findall(vimeo_page_html)
 
     play_item = xbmcgui.ListItem(path=video_url[0])
 

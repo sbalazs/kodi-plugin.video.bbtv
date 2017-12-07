@@ -45,7 +45,7 @@ def get_url(**kwargs):
 
 def get_videos():
     html_content = load_url(bbtv_video_list_url)
-    return re.compile('<div class="search-result-item">\n\s+<img src="([-_a-zA-Z0-9\.\/\:]+)".*\n.*>([-a-zA-Z0-9\s\#\.]+)<\/a></h4>\n\s+<p>(.*\n?.*)</p>\n\s+<a class="search-link" href="([-_a-zA-Z0-9\.\/\:]+)"').findall(html_content)
+    return re.compile('<div class="search-result-item">\n\s+<img src="([-_a-zA-Z0-9\.\/\:]+)".*\n.*>([-a-zA-Z0-9\s\#\.]+)<\/a></h4>\n\s+<p>([\s\S]*?)</p>\n\s+<a class="search-link" href="([-_a-zA-Z0-9\.\/\:]+)"').findall(html_content)
 
 def list_videos():
     """
@@ -57,7 +57,7 @@ def list_videos():
         # Create a list item with a text label and a thumbnail image.
         list_item = xbmcgui.ListItem()
         # Set additional info for the list item.
-        list_item.setInfo('video', {'title': video[1], 'plot': video[2]})
+        list_item.setInfo('video', {'title': video[1].replace('. ','.',1), 'plot': video[2]})
         # Set graphics (thumbnail, fanart, banner, poster, landscape etc.) for the list item.
         # Here we use the same image for all items for simplicity's sake.
         # In a real-life plugin you need to set each image accordingly.

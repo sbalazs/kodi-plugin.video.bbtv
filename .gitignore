@@ -60,3 +60,4 @@ target/
 
 *.zip
 /nbproject
+.DS_Store
